@@ -4,6 +4,7 @@ import { AuthProvider } from "./Login/AuthContext";
 import NavBar from "./NavBar/NavBar";
 import Home from "./Home/Home"
 import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
 import NotFound from "./NotFound/NotFound";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
