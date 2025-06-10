@@ -28,7 +28,9 @@ function NavBar() {
             </li>
           </ul>
           {isLoggedIn && (
-            <span className="me-3 text-white">Welcome, {getUserInfo().sub}!</span>
+            <span className="me-3 text-white">
+              Welcome, {getUserInfo().sub}!
+            </span>
           )}
           {!isLoggedIn && (
             <Link to="/login" className="btn btn-outline-light ms-2">
@@ -46,7 +48,11 @@ function NavBar() {
             </Link>
           )}
           {isLoggedIn && (
-            <button className="btn btn-danger ms-2" type="button" onClick={logout}>
+            <button
+              className="btn btn-danger ms-2"
+              type="button"
+              onClick={logout}
+            >
               Sign Out
             </button>
           )}
