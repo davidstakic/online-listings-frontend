@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import listingService from "../service/listingService";
 import { useAuth } from "../Login/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { isLoggedIn, getUserInfo } = useAuth();
@@ -16,6 +17,8 @@ function Home() {
     owner: "",
     page: 1,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -170,7 +173,11 @@ function Home() {
             </thead>
             <tbody>
               {listings.map((listing) => (
-                <tr key={listing.id}>
+                <tr
+                  key={listing.id}
+                  onClick={() => navigate(`/listing/${listing.id}`)}
+                  style={{ cursor: "pointer" }}
+                >
                   <td>
                     <img
                       src={listing.imageUrl}

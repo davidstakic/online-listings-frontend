@@ -17,6 +17,15 @@ const listingService = {
 
     return response.data;
   },
+  get: async (id) => {
+    const response = await axiosInstance.get(`/api/listings/${id}`, {
+      headers: {
+        skip: "true",
+      }
+    });
+
+    return response.data;
+  }
 };
 
 export default listingService;

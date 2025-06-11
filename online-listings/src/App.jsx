@@ -6,6 +6,7 @@ import Home from "./Home/Home"
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import NotFound from "./NotFound/NotFound";
+import ListingDetails from "./ListingDetails/ListingDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/listing/:id" element={<ListingDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
