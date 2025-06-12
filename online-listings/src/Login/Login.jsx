@@ -27,7 +27,7 @@ function Login() {
     }
 
     if (password === "") {
-      setPasswordError("Please enter your password");
+      setPasswordError("Please enter your password.");
       hasError = true;
     } else {
       setPasswordError(null);

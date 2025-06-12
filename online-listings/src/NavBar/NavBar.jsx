@@ -43,7 +43,7 @@ function NavBar() {
             </Link>
           )}
           {isLoggedIn && (
-            <Link to="/new-listing" className="btn btn-success ms-2">
+            <Link to="/listing/create" className="btn btn-success ms-2">
               New Listing
             </Link>
           )}

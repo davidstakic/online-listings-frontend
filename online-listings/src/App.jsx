@@ -7,6 +7,8 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import NotFound from "./NotFound/NotFound";
 import ListingDetails from "./ListingDetails/ListingDetails";
+import ListingForm from "./ListingForm/ListingForm";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   return (
@@ -18,6 +20,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/listing/:id" element={<ListingDetails />} />
+          <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
+            <Route path="/listing/create" element={<ListingForm />} />
+          </Route>
+          <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
+            <Route path="/listing/edit/:id" element={<ListingForm />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

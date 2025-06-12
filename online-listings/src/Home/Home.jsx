@@ -20,6 +20,8 @@ function Home() {
 
   const navigate = useNavigate();
 
+  const[refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -32,7 +34,7 @@ function Home() {
     };
 
     fetchListings();
-  }, [params]);
+  }, [params, refresh]);
 
   const prevPage = () => {
     if (params.page > 1) {
@@ -58,6 +60,18 @@ function Home() {
       }));
     }
   };
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedListingId, setSelectedListingId] = useState(null);
+
+  const deleteListing = async () => {
+      try {
+        await listingService.delete(selectedListingId);
+        setRefresh((prev) => !prev);
+      } catch (error) {
+        console.error("Failed to delete listing:", error);
+      }
+    };
 
   return (
     <>
@@ -191,12 +205,27 @@ function Home() {
                   {isLoggedIn && getUserInfo().sub === listing.owner && (
                     <>
                       <td>
-                        <button type="button" className="btn btn-primary">
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/listing/edit/${listing.id}`);
+                          }}
+                        >
                           Edit
                         </button>
                       </td>
                       <td>
-                        <button type="button" className="btn btn-danger">
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedListingId(listing.id);
+                            setShowModal(true);
+                          }}
+                        >
                           Delete
                         </button>
                       </td>
@@ -231,6 +260,56 @@ function Home() {
             </li>
           </ul>
         </nav>
+        {showModal && (
+          <div
+            className="modal fade show d-block"
+            onClick={() => setShowModal(false)}
+            tabIndex="-1"
+            role="dialog"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          >
+            <div className="modal-dialog" role="document" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-content">
+                <div className="modal-header position-relative">
+                  <h5 className="modal-title">Are you sure?</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    aria-label="Close"
+                    onClick={() => setShowModal(false)}
+                    style={{
+                      position: "absolute",
+                      top: "1rem",
+                      right: "1rem",
+                    }}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>This action will delete the listing permanently.</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => {
+                      setShowModal(false);
+                      deleteListing();
+                    }}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setShowModal(false)}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

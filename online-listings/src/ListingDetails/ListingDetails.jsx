@@ -13,6 +13,7 @@ function ListingDetails() {
       try {
         const data = await listingService.get(id);
         setListing(data);
+        setNotFound(false);
       } catch (error) {
         if (error.response && error.response.status === 404) {
           setNotFound(true);
@@ -51,6 +52,7 @@ function ListingDetails() {
               <span className="me-3">{listing.category}</span>
               <span className="me-3">{listing.ownerUsername}</span>
               <span className="me-3">{listing.ownerPhone}</span>
+              <span className="me-3">{listing.city}</span>
               <span>
                 {new Date(listing.listedAt).toLocaleString()}
               </span>
