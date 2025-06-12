@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import listingService from "../service/listingService";
 import { useAuth } from "../Login/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 function Home() {
   const { isLoggedIn, getUserInfo } = useAuth();
@@ -68,6 +70,7 @@ function Home() {
       try {
         await listingService.delete(selectedListingId);
         setRefresh((prev) => !prev);
+        toast.success("Listing successfully deleted.");
       } catch (error) {
         console.error("Failed to delete listing:", error);
       }

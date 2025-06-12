@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../service/UserService";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -53,6 +54,7 @@ function SignUp() {
       try {
         await userService.signUp({ username, phoneNumber, password });
         setSignUpError(null);
+        toast.success("You have successfuly registered.");
         navigate("/login");
       } catch (err) {
         if (err.status === 400) {

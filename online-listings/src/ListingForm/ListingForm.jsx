@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../Login/AuthContext";
 import listingService from "../service/listingService";
 import NotFound from "../NotFound/NotFound";
+import { toast } from "react-toastify";
 
 function ListingForm() {
   const { id } = useParams();
@@ -162,8 +163,10 @@ function ListingForm() {
       try {
         if (id) {
           await listingService.edit(formData, id);
+          toast.success("Listing successfully updated.");
         } else {
           await listingService.create(formData);
+          toast.success("Listing successfully created.");
         }
         setErrors((prev) => ({
           ...prev,

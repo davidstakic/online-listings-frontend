@@ -9,6 +9,8 @@ import NotFound from "./NotFound/NotFound";
 import ListingDetails from "./ListingDetails/ListingDetails";
 import ListingForm from "./ListingForm/ListingForm";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </AuthProvider>
   );
 }
