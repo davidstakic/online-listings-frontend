@@ -1,4 +1,4 @@
-# 🏠 Online Listings Frontent
+# 🏠 Online Listings Frontend
 
 This is a React application that serves as a frontent for managing online ads (listings).
 
