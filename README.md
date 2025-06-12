@@ -1,6 +1,6 @@
 # 🏠 Online Listings Frontend
 
-This is a React application that serves as a frontent for managing online ads (listings).
+This is a React application that serves as a frontend for managing online ads (listings).
 
 ---
 
